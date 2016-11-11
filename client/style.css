@@ -1,0 +1,87 @@
+body
+{
+    background-color: #FFFFFF;
+    padding-top: 8%;
+    color: #757575;
+    font-family: sans-serif;
+}
+h3
+{
+    color: black;
+}
+#login:hover,#submit-question:hover
+{
+    background-color: royalblue;
+    color: white;
+}
+#trivia-menu,#trivia-game, #trivia-questions
+{
+    display: none;
+
+}
+
+
+#menu
+{
+    background-color: #FFFFFF;
+}
+#menu .item:hover
+{
+    background-color: #000;
+    color: #FFF;
+}
+#question
+{
+
+	border-radius: 3em;
+	color: #FFF;
+	font-size: 1.5em;
+}
+input
+{
+    height: 4em;
+}
+
+.eleven.wide.column h1.ui.header
+{
+	font-size: 4em;
+	color: #757575;
+
+}
+.eleven.wide.column h2.ui.header
+{
+	font-size: 2em;
+	color: #757575;
+
+}
+
+#submit-answer:hover
+{
+	background-color: #34BFA5;
+	color: #fff;
+}
+
+#next:hover
+{
+	background-color: #F92672;
+	color: #fff;
+}
+
+#score
+{
+	color: #757575;
+}
+
+#correct-score, .correct.answer
+{
+    color: #34BFA5;
+}
+#incorrect-score, .incorrect.answer
+{
+    color: #F92672;
+}
+.ui.form .starter
+{
+    color:#F92672;
+    font-size: 2em;
+}

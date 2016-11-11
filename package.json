@@ -1,0 +1,28 @@
+{
+  "name": "trivia-game",
+  "version": "1.0.0",
+  "description": "CPSC 473 assignment 4",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongodb": "^2.2.11",
+    "redis": "^2.6.2",
+    "socket.io":"*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RodrigoFigueroaM/Web-Service-API-online-trivia-game.git"
+  },
+  "author": "Rodrigo Figueroa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RodrigoFigueroaM/Web-Service-API-online-trivia-game/issues"
+  },
+  "homepage": "https://github.com/RodrigoFigueroaM/Web-Service-API-online-trivia-game#readme"
+}

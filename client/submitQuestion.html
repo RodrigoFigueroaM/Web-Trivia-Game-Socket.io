@@ -1,0 +1,51 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+        <script src="semantic/dist/semantic.min.js"></script>
+        <!--  CSS -->
+        <link rel="stylesheet" type="text/css" href="style.css">
+         <title>Trivia Game </title>
+    </head>
+    <body>
+
+        <div class="ui middle aligned very padded grid">
+            <!-- menu-->
+            <div class="two wide  middle aligned content column">
+                <div class="ui vertical secondary labeled icon menu" id="menu">
+                    <a href="index.html" class=" item">
+                        <i class=" game icon"> </i>
+                         Play
+                    </a>
+                    <a href="#" class="item">
+                        <i class=" write icon"></i>
+                        Ask
+                    </a>
+                </div>
+            </div>
+
+            <!--input questions-->
+            <div class="eleven wide column">
+                  <h1 class="ui header">Contibute to Trivia</h1>
+                  <h2 class="ui header 3">Input your own questions.</h2>
+                  <p><strong>Note:</strong> Answers to question are Case-sensitive</p>
+                  <form class="ui form">
+                      <div class="fluid field">
+                          <input id="post-question" type="text" placeholder="Question?">
+                      </div>
+                      <div class="fluid field">
+                          <input id="answer" type="text" placeholder="Answer">
+                      </div>
+                      <button  id="submit-question" class="big ui button">
+                          Submit
+                      </button>
+                  </form>
+                </div>
+            </div>
+
+
+    </body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="socketAskQuestions.js"></script>
+</html>
