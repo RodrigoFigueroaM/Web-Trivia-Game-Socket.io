@@ -35,8 +35,7 @@ or
 $ node server.js 
 ````
 
-4.- Access
-Go to browser and type localhost:3000
+5.- Go to browser and type localhost:3000
 
 
 
