@@ -9,8 +9,11 @@ var menu = function()
     $('#ask').on('click', function (e)
      {
          e.preventDefault();
-         $('#trivia-game').fadeOut(function () {
+         $('#trivia-game').fadeOut(function ()
+         {
              $('#trivia-questions').show();
+             $('#trivia-score').hide();
+             $('#trivia-players').hide();
              $('#trivia-game').off('clicks');
          });
     });
@@ -20,10 +23,12 @@ var menu = function()
      {
           e.preventDefault();
           $('#trivia-questions').fadeOut(function()
-      {
-          $('#trivia-game').show();
-          $('#trivia-questions').off('clicks');
-      });
+          {
+              $('#trivia-game').show();
+              $('#trivia-score').show();
+              $('#trivia-players').show();
+              $('#trivia-questions').off('clicks');
+          });
   });
 };
 

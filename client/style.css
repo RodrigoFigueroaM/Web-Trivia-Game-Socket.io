@@ -1,7 +1,7 @@
 body
 {
     background-color: #FFFFFF;
-    padding-top: 8%;
+    padding-top: 5%;
     color: #757575;
     font-family: sans-serif;
 }
@@ -14,7 +14,7 @@ h3
     background-color: royalblue;
     color: white;
 }
-#trivia-menu,#trivia-game, #trivia-questions
+#trivia-menu,#trivia-game, #trivia-questions,#trivia-players,#trivia-score
 {
     display: none;
 

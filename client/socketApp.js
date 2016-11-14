@@ -80,7 +80,7 @@ function beginRound (socket)
             {
                 $('#next').prop( 'disabled', true );
                 $('#submit-answer').prop('disabled', false);
-                $('.ui form .starter').remove();
+                $('.ui form span').remove();
                 $('.ui form').append('<span><h3 class= "starter">'+data.starter+'</h3> started a new round</span>');
                 $('.starter').hide();
                 $('.starter').fadeIn(1000,function(){});
@@ -129,6 +129,8 @@ var main = function()
          {
             $('#trivia-login').fadeOut();
             $('#trivia-menu').show();
+            $('#trivia-players').show();
+            $('#trivia-score').show();
             $('#trivia-game').show();
             $('#trivia-login').off('clicks');
             socket.emit('new user',{username: $('#username').val()});
