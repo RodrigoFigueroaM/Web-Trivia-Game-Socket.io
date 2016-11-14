@@ -7,11 +7,17 @@
         <script src="semantic/dist/semantic.min.js"></script>
         <!--  CSS -->
         <link rel="stylesheet" type="text/css" href="style.css">
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="socketApp.js"></script>
+        <script src="menu.js"></script>
+        <script src="socketAskQuestions.js"></script>
          <title>Trivia Game </title>
     </head>
 
     <body>
 
+    <!--log in-->
         <div id= "trivia-login">
             <div class="ui middle aligned grid">
                     <div class="five center aligned wide column">
@@ -28,44 +34,46 @@
                 </div>
           </div>
 
+         <!-- menu-->
           <div class="ui grid">
               <div id= "trivia-menu">
-              <div class="two wide  middle aligned content column">
-                    <div class="ui vertical secondary labeled icon menu" id="menu">
-                        <a class="item" id="play">
-                            <i class=" game icon"> </i>
-                             Play
-                        </a>
-                        <a  class="item" id="ask">
-                            <i class="write icon"></i>
-                            Ask
-                        </a>
+                  <div class="two wide middle aligned content column">
+                        <div class="ui vertical secondary labeled icon menu" id="menu">
+                            <a class="item" id="play">
+                                <i class=" game icon"> </i>
+                                 Play
+                            </a>
+                            <a  class="item" id="ask">
+                                <i class="write icon"></i>
+                                Ask
+                            </a>
+                        </div>
                     </div>
-                </div>
             </div>
 
-
+            <!--play Trivia-->
               <div id= "trivia-game">
                   <div class="ui grid">
-                  <div class="eleven wide column">
-                      <h1 class="ui header">Let's play Trivia</h1>
-                      <p>Aswer other users questions. Try not to Google</p>
-                      <div class="ui black message"  id= "question">
-                          Question:
-                      </div>
-                      <p><strong>Note:</strong> Answers to question are Case-sensitive</p>
-                      <form class="ui form">
-                          <div class="fluid field">
-                              <input id="answer" type="text" placeholder="Answer">
+
+                      <div class="eleven wide column">
+                          <h1 class="ui header">Let's play Trivia</h1>
+                          <p>Aswer other users questions. Try not to Google</p>
+                          <div class="ui black message"  id= "question">
+                              Question:
                           </div>
-                          <button  id="submit-answer" class="big ui button">
-                              Submit
-                          </button>
-                          <button id="next" class="big ui button">
-                              Start round
-                          </button>
-                      </form>
-                    </div>
+                          <p><strong>Note:</strong> Answers to question are Case-sensitive</p>
+                          <form class="ui form">
+                              <div class="fluid field">
+                                  <input id="answer" type="text" placeholder="Answer">
+                              </div>
+                              <button  id="submit-answer" class="big ui button">
+                                  Submit
+                              </button>
+                              <button id="next" class="big ui button">
+                                  Start round
+                              </button>
+                          </form>
+                        </div>
 
 
                      <div class="three wide column">
@@ -76,17 +84,17 @@
 
                     <div class = "eight wide right aligned column" >
                         <div class=" text value">
-                                Score
-                            </div>
-                                <div class="ui large green statistic" id="correct" >
-                                <div class="value" id ="correct-score" >
+                            Score
+                        </div>
+                        <div class="ui large green statistic" id="correct" >
+                            <div class="value" id ="correct-score" >
 
-                                </div>
                             </div>
-                            <div class="ui large red statistic" id="incorrect">
-                                <div class="value"  id ="incorrect-score"  >
-                                </div>
+                        </div>
+                        <div class="ui large red statistic" id="incorrect">
+                            <div class="value"  id ="incorrect-score"  >
 
+                            </div>
                         </div>
                     </div>
 
@@ -97,6 +105,7 @@
                     </div>
                 </div>
             </div>
+
             <!--input questions-->
             <div id= "trivia-questions">
                 <div class="ui grid">
@@ -122,10 +131,5 @@
 
 
     </body>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="socketApp.js"></script>
-    <script src="menu.js"></script>
-    <script src="socketAskQuestions.js"></script>
-
 
 </html>

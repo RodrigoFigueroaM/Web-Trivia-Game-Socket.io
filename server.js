@@ -1,8 +1,5 @@
-/* jshint browser: true, jquery: true, camelcase: true, indent: 2, undef: true, quotmark: single, maxlen: 80, trailing: true, curly: true, eqeqeq: true, forin: true, immed: true, latedef: true, newcap: true, nonew: true, unused: true, strict: true */
-
 //requirements
 var express = require('express'),
-//    http = require('http'),
     body = require('body-parser'),
     redis = require('redis').createClient(),
     mongo= require('mongodb').MongoClient,
@@ -12,15 +9,13 @@ var express = require('express'),
     url='mongodb://localhost/questionnaire',
     io = require('socket.io').listen(server);
 
-//global variable
+//global variables
 var questionnaire;
 var answerId=0; //used so taht each question get a different Id
 var players=[];
 var connections =[];
 
 
-//app.use(body.urlencoded({extended:false}));
-//app.use(body.json());
 app.use(express.static(__dirname+'/client'));
 
 /******************************************************
@@ -93,12 +88,19 @@ app.get('/',function(req,res)
           res.send(index.html);
     });
 
+/*****************************************************
+   Establish conections
+******************************************************/
 io.sockets.on('connection',function(socket)
     {
         var incomingdata;
         connections.push(socket);
         console.log('Number of conections: %s', connections.length);
+        /*****************************************************
+           Store name of every  user that is playing
 
+           returns an array with all the usernames
+        ******************************************************/
         socket.on('new user',function(data)
         {
             socket.username= data;
@@ -107,10 +109,17 @@ io.sockets.on('connection',function(socket)
             io.sockets.emit('get users', players );
         });
 
+        /*****************************************************
+           pick a random question from our database and send
+           it for the game
+
+           returns the question piicked at random
+        ******************************************************/
         socket.on('getQuestion',function()
         {
             var sendThisQuestion={}; //question to send
             var random;     //randomizes the question for user side
+
             'use strict';
             random = Math.floor((Math.random() * answerId) + 1);
             questionnaire.findOne({answerId:random},function (err, askQuestion)
@@ -128,11 +137,19 @@ io.sockets.on('connection',function(socket)
             });
         });
 
+        /*****************************************************
+           check when a new round has started
+           returns the username of who ever started the round
+        ******************************************************/
         socket.on('new round', function (data)
         {
             io.sockets.emit('begin round', {newRound: data.state, starter: socket.username.username});
         })
 
+        /*****************************************************
+           check if the answer is right or wrong
+           returns true or false accordingly
+        ******************************************************/
         socket.on('answer',function (data)
          {
              var checkAnswer={}; // check client Answer will contain answer and id
@@ -174,20 +191,24 @@ io.sockets.on('connection',function(socket)
                    });
         });
 
+        /*****************************************************
+           increment the score according to the answer provided
+           returns values on the score
+        ******************************************************/
         socket.on('score',function()
-            {
-                var score={};   // current score for player
-                //change to mget
-                redis.mget(['right','wrong'],function(err,value)
-                    {
-                        score.right=value[0];
-                        score.wrong=value[1];
-                        io.sockets.emit('updateScore',score);
-                    });
-
-
-            });
-
+        {
+            var score={};   // current score for player
+            //change to mget
+            redis.mget(['right','wrong'],function(err,value)
+                {
+                    score.right=value[0];
+                    score.wrong=value[1];
+                    io.sockets.emit('updateScore',score);
+                });
+        });
+        /*****************************************************
+           insert a new question to our database
+        ******************************************************/
         socket.on("new question",function (data)
          {
              var newQuestion={};
@@ -196,13 +217,14 @@ io.sockets.on('connection',function(socket)
              newQuestion.ansnwer = data.answer;
              newQuestion.answerId= ++answerId;
              questionnaire.insert(newQuestion);
-
-
         });
 
+        /*****************************************************
+           check when a player disconects from game.
+           Remove the players connection and username
+        ******************************************************/
         socket.on('disconnect', function (data)
         {
-
             players.splice(players.indexOf(socket.username),1);
             console.log('%s disconnected',socket.username );
             io.sockets.emit('get users',players);
@@ -212,14 +234,3 @@ io.sockets.on('connection',function(socket)
     });
 
 console.log('server listening on  3000');
-
-
-/*
-    server
-        should take care of number of questions provided by round
-        block and unblock buttons
-    client
-        animation when a new answer is provided
-        when going to ask task. use efect for showing maybe prive a modal form
-        send name when sent remove that from list
-*/
