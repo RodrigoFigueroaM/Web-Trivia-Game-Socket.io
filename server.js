@@ -105,6 +105,7 @@ io.sockets.on('connection',function(socket)
         {
             socket.username= data;
             players.push(socket.username);
+            console.log('New player:');
             console.dir(socket.username );
             io.sockets.emit('get users', players );
         });
@@ -214,7 +215,7 @@ io.sockets.on('connection',function(socket)
              var newQuestion={};
 
              newQuestion.question = data.question;
-             newQuestion.ansnwer = data.answer;
+             newQuestion.answer = data.answer;
              newQuestion.answerId= ++answerId;
              questionnaire.insert(newQuestion);
         });

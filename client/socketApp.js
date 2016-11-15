@@ -161,7 +161,7 @@ var main = function()
         socket.emit('getQuestion');
     });
 
-    /*establish connection with server*/
+
     updateAnswer(socket);
     updateQuestion(socket);
     updateScore(socket);
