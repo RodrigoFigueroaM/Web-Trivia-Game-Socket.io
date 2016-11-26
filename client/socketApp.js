@@ -17,12 +17,9 @@ var updateScore = function (socket)
   	'use strict';
     socket.on('updateScore', function(data)
     {
-        $('#correct-score').remove();
-        $('#incorrect-score').remove();
-        $('#correct').prepend('<div class="value" id ="correct-score" >'+data.right+ '</div>');
-        $('#incorrect').prepend('<div class="value" id ="incorrect-score" >'+data.wrong+ '</div>');
-        $('#correct-score').transition('jiggle');
-        $('#incorrect-score').transition('jiggle');
+        scoreModel.right(data.right);
+        scoreModel.wrong(data.wrong);
+        scoreModel.update('#correct-score','#incorrect-score');
     });
 };
 
@@ -36,12 +33,8 @@ var updateQuestion = function(socket)
     socket.on('newQuestion',function (data)
     {
         currentQuestion=data;
-        $('#question .questionAsked').remove();
-        $('#question').append('<span class= "questionAsked">'+data.question+'</span>');
-        $('.questionAsked').hide();
-        $('.questionAsked').fadeIn(1200,function(){});
-
-
+        questionModel.question(currentQuestion.question);
+        questionModel.update('.questionAsked');
     });
 };
 
@@ -54,16 +47,7 @@ function updatePlayers(socket)
   	'use strict';
     socket.on('get users',function(data)
     {
-        var i=0;
-        for (i; i <= data.length;i++)
-        {
-            $('#myUsers').remove();
-        }
-        data.forEach(function(data)
-        {
-
-            $('#users').append('<div class="item" id="myUsers"><div class="content"><div class="header">'+data.username+'</div> </div></div>');
-        });
+        usersModel.user( data);
     });
 }
 
@@ -80,10 +64,9 @@ function beginRound (socket)
             {
                 $('#next').prop( 'disabled', true );
                 $('#submit-answer').prop('disabled', false);
-                $('.ui form span').remove();
-                $('.ui form').append('<span><h3 class= "starter">'+data.starter+'</h3> started a new round</span>');
-                $('.starter').hide();
-                $('.starter').fadeIn(1000,function(){});
+                console.log(data.starter);
+                newRoundModel.name(data.starter);
+
             }
             else
             {
@@ -103,15 +86,14 @@ function updateAnswer (socket)
   	'use strict';
     socket.on('checkAnswer', function(data)
     {
-        $('#answerer').remove();
-        $('#provider').append('<h3 class= "ui text" id="answerer" > '+ data.answerer+' answered </h3>');
+        answererModel.name(data.answerer);
         if(data.correct==='true')
         {
-          $('#answerer').append('<p class="correct answer">correct</p>');
+            answererModel.checkAnswer('correct');
         }
         else
         {
-            $('#answerer').append('<p class="incorrect answer">incorrect</p>');
+            answererModel.checkAnswer('incorrect');
         }
         socket.emit('score');
     });
@@ -139,27 +121,6 @@ var main = function()
           }
     });
 
-    /*Start a new round after clicking button to get questions*/
-    $('#next').on('click',function(e)
-    {
-        e.preventDefault();
-        socket.emit('new round',{state: true});
-        socket.emit('getQuestion');
-    });
-
-    /*Submit answer for current question */
-    $('#submit-answer').on('click',function (e)
-    {
-        var currentAnswer={};
-        e.preventDefault();
-        currentAnswer.answer=$('#answer').val();
-        currentAnswer.answerId=currentQuestion.answerId;
-        socket.emit('answer',(currentAnswer));
-        $('#answer').val('');
-        $('.incorrect-score').remove();
-        $('.correct-score').remove();
-        socket.emit('getQuestion');
-    });
 
 
     updateAnswer(socket);
@@ -168,7 +129,6 @@ var main = function()
     updatePlayers(socket);
     beginRound(socket);
 };
-
 
 
 $(document).ready(main);

@@ -71,15 +71,20 @@ input
 	color: #757575;
 }
 
-#correct-score, .correct.answer
+#correct-score
 {
     color: #34BFA5;
 }
-#incorrect-score, .incorrect.answer
+.answer
+{
+    color: #000;
+    font-size: 2em;
+}
+#incorrect-score
 {
     color: #F92672;
 }
-.ui.form .starter
+.starter
 {
     color:#F92672;
     font-size: 2em;

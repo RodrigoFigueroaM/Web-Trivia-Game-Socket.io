@@ -5,6 +5,7 @@
 
         <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
         <script src="semantic/dist/semantic.min.js"></script>
+
         <!--  CSS -->
         <link rel="stylesheet" type="text/css" href="style.css">
          <title>Trivia Game </title>
@@ -68,27 +69,39 @@
                 <div id= "trivia-game" class="eleven wide column">
                     <h1 class="ui header">Let's play Trivia</h1>
                     <p>Aswer other users questions. Try not to Google</p>
-                    <div class="ui black message"  id= "question">
-                          Question:
+                    <div data-bind="with: question" class="ui black message"  id= "question">
+                          Question:<span data-bind="text: question" class= "questionAsked"></span>
                     </div>
                     <p><strong>Note:</strong> Answers to question are Case-sensitive</p>
-                    <form class="ui form">
+                    <form  data-bind="with: events" class="ui form">
                         <div class="fluid field">
                             <input id="answer" type="text" placeholder="Answer">
                         </div>
-                        <button  id="submit-answer" class="big ui button">
+                        <button data-bind="click: clickSubmit" id="submit-answer" class="big ui button">
                             Submit
                         </button>
-                        <button id="next" class="big ui button">
-                            Start round
-                        </button>
+                            <button  data-bind="click: clickNext" id="next" class="big ui button">
+                                Start round
+                            </button>
+                        </span>
                      </form>
+                     <div data-bind="with: newRound" >
+                         <h3 data-bind=" text: name " class= "starter" ></h3>
+                         started a new round
+                     </div>
                  </div>
 
                  <!--Trivia online players-->
-                 <div id= "trivia-players"  class="three wide column">
-                     <div class="ui celled list" id="users">
-                         Other players:
+                 <div data-bind ="with: usersOnline" id= "trivia-players"  class="three wide column">
+                         Players:
+                     <div data-bind="foreach: user" class="ui celled list" id="users">
+                         <div  class="item" id="myUsers">
+                             <div  class="content">
+                                 <div  data-bind="text: username" class="header">
+
+                                 </div>
+                              </div>
+                          </div>
                      </div>
                 </div>
 
@@ -97,31 +110,40 @@
                     <div class=" text value">
                         Score
                     </div>
-                    <div class="ui large green statistic" id="correct" >
-                        <div class="value" id ="correct-score" >
-
+                    <div data-bind="with: score" class="ui large green statistic" id="correct" >
+                        <div data-bind= "text: right" class="value" id ="correct-score" >
+                            0
                         </div>
                     </div>
-                    <div class="ui large red statistic" id="incorrect">
-                        <div class="value"  id ="incorrect-score"  >
-
+                    <div data-bind="with: score" class="ui large red statistic" id="incorrect">
+                        <div data-bind= "text: wrong" class="value" id ="incorrect-score" >
+                            0
                         </div>
                     </div>
                 </div>
 
                 <div class = "six wide column" >
-                    <div id="provider">
+                    <div data-bind= "with: answerer" id="provider">
+                        <h3 data-bind= "text: name"class= "ui text" id="answerer" >  </h3>
+                        <p data-bind= "text: checkAnswer" class="answer"> </p>
                     </div>
                 </div>
             </div>
 
 
-
     </body>
+    <!--  knockout -->
+    <script type='text/javascript' src='knockout-3.4.1.js'></script>
+
+    <!--  socket.io -->
     <script src="/socket.io/socket.io.js"></script>
+
+    <!--  own scripts.io -->
+    <script src="mvvc.js"></script>
     <script src="socketApp.js"></script>
     <script src="menu.js"></script>
     <script src="socketAskQuestions.js"></script>
+
 
 
 </html>
