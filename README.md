@@ -5,7 +5,7 @@ CPSC 473 assignment 4
 
 - Node.js
 - Express.js
-- Body-parser
+- knockout.js
 - Socket.io
 - MongoDB
 - Redis
