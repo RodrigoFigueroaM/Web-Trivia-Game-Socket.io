@@ -12,7 +12,7 @@ var socket = io.connect('http://localhost:3000');
     Updates score HTML field
     takes as parameter socket beign used
 ******************************************************/
-var updateScore = function (socket)
+var updateScore = function ()
 {
   	'use strict';
     socket.on('updateScore', function(data)
@@ -27,7 +27,7 @@ var updateScore = function (socket)
     Updates question HTML field
     takes as a parameter socket beign used
 ******************************************************/
-var updateQuestion = function(socket)
+var updateQuestion = function()
 {
   	'use strict';
     socket.on('newQuestion',function (data)
@@ -42,7 +42,7 @@ var updateQuestion = function(socket)
     Updates Player HTML field
     takes as a parameter socket beign used
 ******************************************************/
-function updatePlayers(socket)
+function updatePlayers()
 {
   	'use strict';
     socket.on('get users',function(data)
@@ -55,7 +55,7 @@ function updatePlayers(socket)
     Enables and disables the corresponding buttons that
     will be used in the program
 ******************************************************/
-function beginRound (socket)
+function beginRound ()
 {
   	'use strict';
     socket.on('begin round', function(data)
@@ -81,7 +81,7 @@ function beginRound (socket)
     Updates  HTML field of Player who provided the answer
     and if the player answer correctly
 ******************************************************/
-function updateAnswer (socket)
+function updateAnswer ()
 {
   	'use strict';
     socket.on('checkAnswer', function(data)
@@ -123,11 +123,11 @@ var main = function()
 
 
 
-    updateAnswer(socket);
-    updateQuestion(socket);
-    updateScore(socket);
-    updatePlayers(socket);
-    beginRound(socket);
+    updateAnswer();
+    updateQuestion();
+    updateScore();
+    updatePlayers();
+    beginRound();
 };
 
 
